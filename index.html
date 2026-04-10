@@ -2,48 +2,116 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Why Not Both?</title>
 
   <style>
     body {
       margin: 0;
-      overflow: hidden; /* removes page scroll */
       font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #f8f8f8;
+      background-color: #332d29;
+      color: #f4efe8;
     }
 
-    .container {
-      text-align: center;
+    .page {
+      display: grid;
+      grid-template-columns: 240px 1fr 240px;
+      gap: 24px;
+      align-items: start;
+      max-width: 1800px;
+      margin: 0 auto;
+      padding: 24px;
+      box-sizing: border-box;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      padding-top: 40px;
+    }
+
+    .sidebar h2 {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .sidebar p {
+      font-size: 16px;
+      line-height: 1.5;
+      color: #ddd4c8;
+    }
+
+    .viz-wrap {
+      display: flex;
+      justify-content: center;
     }
 
     iframe {
       border: none;
-      transform: scale(0.85); /* 🔥 shrink */
-      transform-origin: top center;
-      width: 1500px;
-      height: 1000px;
+      width: 1150px;
+      height: 800px;
     }
 
     .nav {
-      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-top: 40px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: #f4efe8;
+      background-color: #433b36;
+      border: 1px solid #8f7750;
+      padding: 12px 16px;
+      border-radius: 999px;
+      font-weight: bold;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .nav a:hover {
+      background-color: #5a4d45;
+      border-color: #caa85a;
+    }
+
+    .nav a.active {
+      background-color: #8f7750;
+      color: #1f1a17;
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
-    <h1>Why Not Both?</h1>
-    <p>How often are players elite at both hitting and fielding?</p>
+  <div class="page">
+    
+    <!-- LEFT SIDE TEXT -->
+    <aside class="sidebar">
+      <h2>Overview</h2>
+      <p>
+        This chart compares Gold Glove and Silver Slugger award rates across MLB careers.
+        Each point represents a player.
+      </p>
+      <p>
+        Players closer to the top right were consistently strong in both.
+        That combination is rare.
+      </p>
+      <p>
+        Try selecting a player and adjusting <strong>Through Season</strong>.
+      </p>
+    </aside>
 
-    <iframe src="https://public.tableau.com/views/GGSS/Dashboard1?:showVizHome=no"></iframe>
+    <!-- MAIN VIZ -->
+    <main class="viz-wrap">
+      <iframe src="https://public.tableau.com/views/GGSS/Dashboard1?:showVizHome=no&:embed=true"></iframe>
+    </main>
 
-    <div class="nav">
-      <a href="page2.html">Explore a Player →</a>
-    </div>
+    <!-- RIGHT NAV -->
+    <nav class="nav">
+      <a class="active" href="index.html">Overview</a>
+      <a href="page2.html">Explore Player</a>
+    </nav>
+
   </div>
 </body>
 </html>
