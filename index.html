@@ -11,47 +11,27 @@
       font-family: Arial, sans-serif;
       background-color: #3d3936;
       color: #f4efe8;
-      overflow: hidden; /* 🔥 no scrolling */
+      overflow: hidden;
     }
 
     .page {
       display: grid;
-      grid-template-columns: auto 320px;
-      gap: 32px;
+      grid-template-columns: 300px auto;
+      gap: 12px; /* 🔥 tightened from 32px */
       max-width: 1700px;
       margin: 0 auto;
-      padding: 20px;
+      padding: 16px; /* 🔥 slightly reduced */
       box-sizing: border-box;
       height: 100vh;
       align-items: start;
     }
 
-    /* VIZ WRAPPER */
-    .viz-wrap {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-    }
-
-    .viz-inner {
-      transform: scale(0.78); /* 🔥 adjust this if needed */
-      transform-origin: top left;
-      width: 1500px;
-      height: 950px;
-    }
-
-    iframe {
-      border: none;
-      width: 1500px;
-      height: 950px;
-    }
-
-    /* SIDE PANEL */
+    /* LEFT PANEL */
     .side-panel {
       display: flex;
       flex-direction: column;
-      gap: 24px;
-      padding-top: 20px;
+      gap: 20px;
+      padding-top: 10px;
     }
 
     .section h2 {
@@ -65,13 +45,13 @@
       color: #ddd4c8;
     }
 
-    /* NAVIGATION */
+    /* NAV */
     .nav {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
       border-top: 1px solid #5a4d45;
-      padding-top: 16px;
+      padding-top: 14px;
     }
 
     .nav a {
@@ -79,7 +59,7 @@
       color: #f4efe8;
       background-color: #433b36;
       border: 1px solid #8f7750;
-      padding: 12px 16px;
+      padding: 10px 14px;
       border-radius: 999px;
       font-weight: bold;
       text-align: center;
@@ -95,20 +75,34 @@
       background-color: #8f7750;
       color: #1f1a17;
     }
+
+    /* VIZ */
+    .viz-wrap {
+      display: flex;
+      justify-content: flex-start; /* 🔥 pulls closer to text */
+      align-items: flex-start;
+    }
+
+    .viz-inner {
+      transform: scale(0.78);
+      transform-origin: top left;
+      width: 1500px;
+      height: 950px;
+    }
+
+    iframe {
+      border: none;
+      width: 1500px;
+      height: 950px;
+    }
+
   </style>
 </head>
 
 <body>
   <div class="page">
 
-    <!-- MAIN VIZ -->
-    <main class="viz-wrap">
-      <div class="viz-inner">
-        <iframe src="https://public.tableau.com/views/GGSS/Dashboard1?:showVizHome=no&:embed=true"></iframe>
-      </div>
-    </main>
-
-    <!-- SIDE PANEL -->
+    <!-- LEFT PANEL -->
     <aside class="side-panel">
 
       <div class="section">
@@ -132,6 +126,13 @@
       </div>
 
     </aside>
+
+    <!-- MAIN VIZ -->
+    <main class="viz-wrap">
+      <div class="viz-inner">
+        <iframe src="https://public.tableau.com/views/GGSS/Dashboard1?:showVizHome=no&:embed=true"></iframe>
+      </div>
+    </main>
 
   </div>
 </body>
