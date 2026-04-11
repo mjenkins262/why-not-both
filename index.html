@@ -9,49 +9,49 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #3d3936;
+      background-color: #3b342f;
       color: #f4efe8;
       overflow: hidden;
     }
 
     .page {
       display: grid;
-      grid-template-columns: 300px auto;
-      gap: 12px; /* 🔥 tightened from 32px */
-      max-width: 1700px;
-      margin: 0 auto;
-      padding: 16px; /* 🔥 slightly reduced */
-      box-sizing: border-box;
+      grid-template-columns: 260px 1fr;
+      gap: 6px;
+      width: 100vw;
       height: 100vh;
+      padding: 10px 8px 10px 10px;
+      box-sizing: border-box;
       align-items: start;
     }
 
-    /* LEFT PANEL */
     .side-panel {
       display: flex;
       flex-direction: column;
-      gap: 20px;
-      padding-top: 10px;
+      justify-content: flex-start;
+      gap: 18px;
+      padding-top: 18px;
+      padding-left: 4px;
+      min-width: 0;
     }
 
     .section h2 {
       font-size: 22px;
-      margin-bottom: 8px;
+      margin: 0 0 8px 0;
     }
 
     .section p {
       font-size: 15px;
-      line-height: 1.5;
+      line-height: 1.45;
       color: #ddd4c8;
+      margin: 0 0 12px 0;
     }
 
-    /* NAV */
     .nav {
       display: flex;
       flex-direction: column;
       gap: 10px;
-      border-top: 1px solid #5a4d45;
-      padding-top: 14px;
+      padding-top: 8px;
     }
 
     .nav a {
@@ -76,15 +76,16 @@
       color: #1f1a17;
     }
 
-    /* VIZ */
     .viz-wrap {
       display: flex;
-      justify-content: flex-start; /* 🔥 pulls closer to text */
+      justify-content: flex-start;
       align-items: flex-start;
+      overflow: hidden;
+      min-width: 0;
     }
 
     .viz-inner {
-      transform: scale(0.78);
+      transform: scale(0.83);
       transform-origin: top left;
       width: 1500px;
       height: 950px;
@@ -94,17 +95,15 @@
       border: none;
       width: 1500px;
       height: 950px;
+      display: block;
     }
-
   </style>
 </head>
 
 <body>
   <div class="page">
 
-    <!-- LEFT PANEL -->
     <aside class="side-panel">
-
       <div class="section">
         <h2>Overview</h2>
         <p>
@@ -124,10 +123,8 @@
         <a class="active" href="index.html">Overview</a>
         <a href="page2.html">Explore Player</a>
       </div>
-
     </aside>
 
-    <!-- MAIN VIZ -->
     <main class="viz-wrap">
       <div class="viz-inner">
         <iframe src="https://public.tableau.com/views/GGSS/Dashboard1?:showVizHome=no&:embed=true"></iframe>
