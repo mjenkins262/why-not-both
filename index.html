@@ -11,23 +11,33 @@
       font-family: Arial, sans-serif;
       background-color: #3d3936;
       color: #f4efe8;
+      overflow: hidden; /* 🔥 no scrolling */
     }
 
     .page {
       display: grid;
-      grid-template-columns: 1fr 320px;
+      grid-template-columns: auto 320px;
       gap: 32px;
       max-width: 1700px;
       margin: 0 auto;
-      padding: 5px;
+      padding: 20px;
       box-sizing: border-box;
-      min-height: 100vh;
+      height: 100vh;
       align-items: start;
     }
 
+    /* VIZ WRAPPER */
     .viz-wrap {
       display: flex;
       justify-content: center;
+      align-items: flex-start;
+    }
+
+    .viz-inner {
+      transform: scale(0.78); /* 🔥 adjust this if needed */
+      transform-origin: top left;
+      width: 1500px;
+      height: 950px;
     }
 
     iframe {
@@ -36,11 +46,12 @@
       height: 950px;
     }
 
+    /* SIDE PANEL */
     .side-panel {
       display: flex;
       flex-direction: column;
-      gap: 5px;
-      padding-top: 40px;
+      gap: 24px;
+      padding-top: 20px;
     }
 
     .section h2 {
@@ -54,10 +65,13 @@
       color: #ddd4c8;
     }
 
+    /* NAVIGATION */
     .nav {
       display: flex;
       flex-direction: column;
       gap: 12px;
+      border-top: 1px solid #5a4d45;
+      padding-top: 16px;
     }
 
     .nav a {
@@ -89,10 +103,12 @@
 
     <!-- MAIN VIZ -->
     <main class="viz-wrap">
-      <iframe src="https://public.tableau.com/views/GGSS/Dashboard1?:showVizHome=no&:embed=true"></iframe>
+      <div class="viz-inner">
+        <iframe src="https://public.tableau.com/views/GGSS/Dashboard1?:showVizHome=no&:embed=true"></iframe>
+      </div>
     </main>
 
-    <!-- RIGHT SIDE PANEL -->
+    <!-- SIDE PANEL -->
     <aside class="side-panel">
 
       <div class="section">
