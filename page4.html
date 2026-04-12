@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why Not Both?</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #3d3936;
+      color: #f4efe8;
+      overflow: hidden;
+    }
+
+    .page {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 6px;
+      width: 100vw;
+      height: 100vh;
+      padding: 10px 8px 10px 10px;
+      box-sizing: border-box;
+      align-items: stretch;
+    }
+
+    .side-panel {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      min-height: 0;
+      padding-top: 18px;
+      padding-left: 4px;
+      box-sizing: border-box;
+    }
+
+    .section {
+      flex: 0 0 auto;
+    }
+
+    .section h2 {
+      font-size: 22px;
+      margin: 0 0 8px 0;
+    }
+
+    .section p {
+      font-size: 15px;
+      line-height: 1.45;
+      color: #ddd4c8;
+      margin: 0 0 12px 0;
+    }
+
+    .nav {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: auto;
+      padding-bottom: 70px;
+    }
+
+    .nav a,
+    .reset-btn {
+      text-decoration: none;
+      color: #f4efe8;
+      background-color: #433b36;
+      border: 1px solid #8f7750;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: bold;
+      text-align: center;
+      transition: all 0.2s ease;
+      font-size: 16px;
+      font-family: Arial, sans-serif;
+      cursor: pointer;
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    .nav a:hover,
+    .reset-btn:hover {
+      background-color: #5a4d45;
+      border-color: #caa85a;
+    }
+
+    .nav a.active {
+      background-color: #8f7750;
+      color: #1f1a17;
+    }
+
+    .reset-btn {
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .viz-wrap {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      overflow: hidden;
+      min-width: 0;
+    }
+
+    .viz-inner {
+      transform: scale(0.88);
+      transform-origin: top left;
+      width: 1500px;
+      height: 950px;
+      margin-left: 50px;
+    }
+
+    iframe {
+      border: none;
+      width: 1520px;
+      height: 980px;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <aside class="side-panel">
+      <div class="section">
+        <h2>Yankees</h2>
+
+        <p>
+          This view looks at Yankees careers only. It is the only team with at least one player in each quadrant.
+        </p>
+
+        <p>
+          That alone makes it a fun team slice. The names are familiar, but the spots are not always what you might expect.
+        </p>
+
+        <p>
+          Are you surprised to see Robinson Cano in the Silver Slugger box? Or Mattingly leaning more fielder than hitter?
+        </p>
+
+        <p>
+          Boggs lands fairly balanced, even though his Yankees years came fairly late. And would you have guessed Dave Winfield would end up on top?
+        </p>
+
+        <p>
+          The way Steinbrenner talked about him, probably not.
+        </p>
+      </div>
+
+      <div class="nav">
+        <a class="active" href="index.html">Overview</a>
+        <a href="page2.html">10-Year Peak</a>
+        <a href="page3.html">Yankees</a>
+        <a href="page4.html">Placeholder 3</a>
+        <button class="reset-btn" onclick="resetViz()">Reset View</button>
+      </div>
+    </aside>
+
+    <main class="viz-wrap">
+      <div class="viz-inner">
+        <iframe
+          id="tableau-frame"
+          src="https://public.tableau.com/views/WhyNotYankees/Dashboard1?:showVizHome=no&:embed=true">
+        </iframe>
+      </div>
+    </main>
+
+  </div>
+
+  <script>
+    function resetViz() {
+      const iframe = document.getElementById("tableau-frame");
+      iframe.src = iframe.src;
+    }
+  </script>
+</body>
+</html>
