@@ -14,7 +14,7 @@
       --accent: #8f7750;
 
       --viz-base-width: 1520;
-      --viz-base-height: 980;
+      --viz-base-height: 940;
     }
 
     * {
@@ -36,16 +36,16 @@
       gap: 10px;
       width: 100%;
       min-height: 100vh;
-      padding: 10px;
+      padding: 6px 8px;
       align-items: start;
     }
 
     .side-panel {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 12px;
       min-width: 0;
-      padding-top: 10px;
+      padding-top: 6px;
     }
 
     .section h2 {
@@ -100,7 +100,7 @@
     .viz-wrap {
       min-width: 0;
       overflow: hidden;
-      padding-top: 4px;
+      padding-top: 0;
     }
 
     .viz-shell {
@@ -120,14 +120,14 @@
       top: 0;
       left: 0;
       width: 1520px;
-      height: 980px;
+      height: 940px;
       transform-origin: top left;
     }
 
     iframe {
       border: none;
       width: 1520px;
-      height: 980px;
+      height: 940px;
       display: block;
       background: transparent;
     }
@@ -150,7 +150,7 @@
       .page {
         grid-template-columns: 1fr;
         min-height: auto;
-        padding: 12px;
+        padding: 10px;
         gap: 14px;
       }
 
@@ -261,7 +261,7 @@
 
   <script>
     const BASE_WIDTH = 1520;
-    const BASE_HEIGHT = 980;
+    const BASE_HEIGHT = 940;
 
     function resetViz() {
       const iframe = document.getElementById("tableau-frame");
