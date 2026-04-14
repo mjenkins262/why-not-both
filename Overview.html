@@ -23,8 +23,6 @@
       font-family: Arial, sans-serif;
       background-color: var(--bg);
       color: var(--text);
-
-      /* ✅ allow ALL scrolling */
       overflow-x: auto;
       overflow-y: auto;
     }
@@ -35,8 +33,6 @@
       gap: 10px;
       padding: 10px;
       align-items: start;
-
-      /* ❌ no height constraints */
       width: max-content;
       min-width: 100%;
     }
@@ -80,6 +76,15 @@
       font-size: 16px;
       cursor: pointer;
       width: 100%;
+      font-family: Arial, sans-serif;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .nav a:hover,
+    .reset-btn:hover {
+      background-color: #5a4d45;
+      border-color: #caa85a;
     }
 
     .nav a.active {
@@ -88,27 +93,32 @@
     }
 
     .viz-wrap {
-      /* ✅ allow scrolling inside viz too */
       overflow: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     .viz-inner {
       width: 1520px;
-      height: 940px;
+      height: 1020px;
     }
 
     iframe {
       border: none;
       width: 1520px;
-      height: 940px;
+      height: 1020px;
       display: block;
+      background: transparent;
     }
 
-    /* MOBILE: stack layout but keep scrolling */
     @media (max-width: 900px) {
       .page {
         display: block;
         width: 100%;
+        min-width: 0;
+      }
+
+      .side-panel {
+        padding-top: 0;
       }
 
       .nav {
@@ -120,6 +130,11 @@
       .nav a,
       .reset-btn {
         flex: 1 1 calc(50% - 4px);
+        width: auto;
+      }
+
+      .viz-wrap {
+        overflow: auto;
       }
     }
 
@@ -186,6 +201,5 @@
       iframe.src = iframe.src;
     }
   </script>
-
 </body>
 </html>
