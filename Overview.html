@@ -6,60 +6,46 @@
   <title>Why Not Both?</title>
 
   <style>
+    :root {
+      --bg: #3d3936;
+      --panel: #433b36;
+      --text: #f4efe8;
+      --muted: #ddd4c8;
+      --accent: #8f7750;
+
+      --viz-base-width: 1520;
+      --viz-base-height: 980;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #3d3936;
-      color: #f4efe8;
-      overflow: hidden;
-    }
-
-    .mobile-block {
-      display: none;
-      min-height: 100vh;
-      box-sizing: border-box;
-      padding: 60px 24px;
-      text-align: center;
-      background-color: #3d3936;
-      color: #f4efe8;
-    }
-
-    .mobile-block h2 {
-      font-size: 28px;
-      margin: 0 0 16px 0;
-    }
-
-    .mobile-block p {
-      font-size: 18px;
-      line-height: 1.6;
-      max-width: 500px;
-      margin: 0 auto 14px auto;
-      color: #ddd4c8;
+      background-color: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      overflow-y: auto;
     }
 
     .page {
       display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: 6px;
-      width: 100vw;
-      height: 100vh;
-      padding: 10px 8px 10px 10px;
-      box-sizing: border-box;
-      align-items: stretch;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 10px;
+      width: 100%;
+      min-height: 100vh;
+      padding: 10px;
+      align-items: start;
     }
 
     .side-panel {
       display: flex;
       flex-direction: column;
-      height: 100%;
-      min-height: 0;
-      padding-top: 18px;
-      padding-left: 4px;
-      box-sizing: border-box;
-    }
-
-    .section {
-      flex: 0 0 auto;
+      gap: 16px;
+      min-width: 0;
+      padding-top: 10px;
     }
 
     .section h2 {
@@ -70,7 +56,7 @@
     .section p {
       font-size: 15px;
       line-height: 1.45;
-      color: #ddd4c8;
+      color: var(--muted);
       margin: 0 0 12px 0;
     }
 
@@ -79,15 +65,14 @@
       flex-direction: column;
       gap: 10px;
       margin-top: auto;
-      padding-bottom: 70px;
     }
 
     .nav a,
     .reset-btn {
       text-decoration: none;
-      color: #f4efe8;
-      background-color: #433b36;
-      border: 1px solid #8f7750;
+      color: var(--text);
+      background-color: var(--panel);
+      border: 1px solid var(--accent);
       padding: 10px 14px;
       border-radius: 999px;
       font-weight: bold;
@@ -96,8 +81,9 @@
       font-size: 16px;
       font-family: Arial, sans-serif;
       cursor: pointer;
-      box-sizing: border-box;
       width: 100%;
+      appearance: none;
+      -webkit-appearance: none;
     }
 
     .nav a:hover,
@@ -107,29 +93,35 @@
     }
 
     .nav a.active {
-      background-color: #8f7750;
+      background-color: var(--accent);
       color: #1f1a17;
     }
 
-    .reset-btn {
-      appearance: none;
-      -webkit-appearance: none;
+    .viz-wrap {
+      min-width: 0;
+      overflow: hidden;
+      padding-top: 4px;
     }
 
-    .viz-wrap {
-      display: flex;
-      justify-content: flex-start;
-      align-items: flex-start;
+    .viz-shell {
+      width: 100%;
       overflow: hidden;
-      min-width: 0;
+    }
+
+    .viz-scale-box {
+      position: relative;
+      width: 100%;
+      height: 0;
+      overflow: hidden;
     }
 
     .viz-inner {
-      transform: scale(0.88);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1520px;
+      height: 980px;
       transform-origin: top left;
-      width: 1500px;
-      height: 950px;
-      margin-left: 50px;
     }
 
     iframe {
@@ -137,32 +129,88 @@
       width: 1520px;
       height: 980px;
       display: block;
+      background: transparent;
+    }
+
+    @media (max-width: 1100px) {
+      .page {
+        grid-template-columns: 220px minmax(0, 1fr);
+      }
+
+      .section h2 {
+        font-size: 20px;
+      }
+
+      .section p {
+        font-size: 14px;
+      }
     }
 
     @media (max-width: 900px) {
-      body {
-        overflow: auto;
-      }
-
       .page {
-        display: none !important;
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding: 12px;
+        gap: 14px;
       }
 
-      .mobile-block {
-        display: block !important;
+      .side-panel {
+        padding-top: 0;
+      }
+
+      .section h2 {
+        font-size: 20px;
+      }
+
+      .section p {
+        font-size: 15px;
+        line-height: 1.5;
+      }
+
+      .nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 0;
+      }
+
+      .nav a,
+      .reset-btn {
+        width: auto;
+        flex: 1 1 calc(50% - 4px);
+        min-width: 140px;
+        font-size: 15px;
+        padding: 10px 12px;
+      }
+
+      .viz-wrap {
+        padding-top: 0;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .page {
+        padding: 10px;
+      }
+
+      .section h2 {
+        font-size: 18px;
+      }
+
+      .section p {
+        font-size: 14px;
+      }
+
+      .nav a,
+      .reset-btn {
+        flex: 1 1 100%;
       }
     }
   </style>
 </head>
 
 <body>
-  <div class="mobile-block" id="mobile-block">
-    <h2>Better on Desktop</h2>
-    <p>This one’s built for a bigger screen.</p>
-    <p>Come back on a desktop or tablet to explore the full interactive view.</p>
-  </div>
-
-  <div class="page" id="desktop-page">
+  <div class="page">
     <aside class="side-panel">
       <div class="section">
         <h2>Overview</h2>
@@ -198,38 +246,44 @@
     </aside>
 
     <main class="viz-wrap">
-      <div class="viz-inner">
-        <iframe
-          id="tableau-frame"
-          src="https://public.tableau.com/views/GGSS/Dashboard1?:showVizHome=no&:embed=true">
-        </iframe>
+      <div class="viz-shell" id="viz-shell">
+        <div class="viz-scale-box" id="viz-scale-box">
+          <div class="viz-inner" id="viz-inner">
+            <iframe
+              id="tableau-frame"
+              src="https://public.tableau.com/views/GGSS/Dashboard1?:showVizHome=no&:embed=true">
+            </iframe>
+          </div>
+        </div>
       </div>
     </main>
   </div>
 
   <script>
+    const BASE_WIDTH = 1520;
+    const BASE_HEIGHT = 980;
+
     function resetViz() {
       const iframe = document.getElementById("tableau-frame");
       iframe.src = iframe.src;
     }
 
-    function checkMobile() {
-      const mobileBlock = document.getElementById("mobile-block");
-      const desktopPage = document.getElementById("desktop-page");
+    function sizeViz() {
+      const shell = document.getElementById("viz-shell");
+      const scaleBox = document.getElementById("viz-scale-box");
+      const inner = document.getElementById("viz-inner");
 
-      if (window.innerWidth <= 900) {
-        mobileBlock.style.display = "block";
-        desktopPage.style.display = "none";
-        document.body.style.overflow = "auto";
-      } else {
-        mobileBlock.style.display = "none";
-        desktopPage.style.display = "grid";
-        document.body.style.overflow = "hidden";
-      }
+      if (!shell || !scaleBox || !inner) return;
+
+      const availableWidth = shell.clientWidth;
+      const scale = Math.min(availableWidth / BASE_WIDTH, 1);
+
+      inner.style.transform = `scale(${scale})`;
+      scaleBox.style.height = `${BASE_HEIGHT * scale}px`;
     }
 
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
+    window.addEventListener("load", sizeViz);
+    window.addEventListener("resize", sizeViz);
   </script>
 </body>
 </html>
