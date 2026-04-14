@@ -6,33 +6,43 @@
   <title>Why Not Both?</title>
 
   <style>
+    :root {
+      --bg: #3d3936;
+      --panel: #433b36;
+      --text: #f4efe8;
+      --muted: #ddd4c8;
+      --accent: #8f7750;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #3d3936;
-      color: #f4efe8;
-      overflow: hidden;
+      background-color: var(--bg);
+      color: var(--text);
+      overflow-x: auto;
+      overflow-y: auto;
     }
 
     .page {
       display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: 6px;
-      width: 100vw;
-      height: 100vh;
-      padding: 10px 8px 10px 10px;
-      box-sizing: border-box;
-      align-items: stretch;
+      grid-template-columns: 300px auto;
+      gap: 28px;
+      padding: 10px;
+      align-items: start;
+      width: max-content;
+      min-width: 100%;
     }
 
     .side-panel {
       display: flex;
       flex-direction: column;
-      height: 100%;
-      min-height: 0;
-      padding-top: 18px;
-      padding-left: 4px;
-      box-sizing: border-box;
+      gap: 12px;
+      padding-top: 6px;
+      width: 300px;
     }
 
     .section {
@@ -47,34 +57,37 @@
     .section p {
       font-size: 15px;
       line-height: 1.45;
-      color: #ddd4c8;
+      color: var(--muted);
       margin: 0 0 12px 0;
     }
 
     .nav {
+      position: fixed;
+      left: 32px;
+      bottom: 32px;
+      width: 240px;
       display: flex;
       flex-direction: column;
       gap: 10px;
-      margin-top: auto;
-      padding-bottom: 70px;
+      z-index: 1000;
     }
 
     .nav a,
     .reset-btn {
       text-decoration: none;
-      color: #f4efe8;
-      background-color: #433b36;
-      border: 1px solid #8f7750;
+      color: var(--text);
+      background-color: var(--panel);
+      border: 1px solid var(--accent);
       padding: 10px 14px;
       border-radius: 999px;
       font-weight: bold;
       text-align: center;
-      transition: all 0.2s ease;
       font-size: 16px;
-      font-family: Arial, sans-serif;
       cursor: pointer;
-      box-sizing: border-box;
       width: 100%;
+      font-family: Arial, sans-serif;
+      appearance: none;
+      -webkit-appearance: none;
     }
 
     .nav a:hover,
@@ -84,36 +97,68 @@
     }
 
     .nav a.active {
-      background-color: #8f7750;
+      background-color: var(--accent);
       color: #1f1a17;
     }
 
-    .reset-btn {
-      appearance: none;
-      -webkit-appearance: none;
-    }
-
     .viz-wrap {
-      display: flex;
-      justify-content: flex-start;
-      align-items: flex-start;
-      overflow: hidden;
-      min-width: 0;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-left: 90px;
     }
 
     .viz-inner {
-      transform: scale(0.88);
-      transform-origin: top left;
-      width: 1500px;
-      height: 950px;
-      margin-left: 50px;
+      width: 1520px;
+      height: 1020px;
     }
 
     iframe {
       border: none;
       width: 1520px;
-      height: 980px;
+      height: 1020px;
       display: block;
+      background: transparent;
+    }
+
+    @media (max-width: 900px) {
+      .page {
+        display: block;
+        width: 100%;
+        min-width: 0;
+        padding: 10px;
+      }
+
+      .side-panel {
+        width: 100%;
+        padding-top: 0;
+      }
+
+      .nav {
+        position: static;
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .nav a,
+      .reset-btn {
+        flex: 1 1 calc(50% - 4px);
+        width: auto;
+      }
+
+      .viz-wrap {
+        overflow: auto;
+        padding-left: 0;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .nav a,
+      .reset-btn {
+        flex: 1 1 100%;
+      }
     }
   </style>
 </head>
@@ -128,9 +173,11 @@
         <p>
           Maybe the most fun view is the animated career path. Click the play button in the Filters box under Season Number, and your selections will chart their career paths through the seasons.
         </p>
+
         <p>
           By default, Ivan Rodriguez and Ken Griffey Jr. are selected. Through most of their careers, they share a nearly identical path. There isn't another pairing that aligns that closely and at that high of a rating for that many seasons.
         </p>
+
         <p>
           You can pair up other players to compare or just simply filter on one player to see their path.
         </p>
@@ -139,7 +186,7 @@
       <div class="nav">
         <a href="Overview.html">Overview</a>
         <a href="TenYear.html">10-Year Peak</a>
-        <a href="Yankees.html">Yankeees</a>
+        <a href="Yankees.html">Yankees</a>
         <a class="active" href="CareerPath.html">Career Paths</a>
         <button class="reset-btn" onclick="resetViz()">Reset View</button>
       </div>
