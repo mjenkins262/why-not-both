@@ -12,9 +12,6 @@
       --text: #f4efe8;
       --muted: #ddd4c8;
       --accent: #8f7750;
-
-      --viz-base-width: 1520;
-      --viz-base-height: 940;
     }
 
     * {
@@ -152,7 +149,6 @@
       height: 940px;
       display: block;
       background: transparent;
-      overflow: hidden;
     }
 
     @media (max-width: 1100px) {
@@ -223,13 +219,30 @@
         padding: 10px 12px;
       }
 
-      .viz-wrap,
+      .viz-wrap {
+        overflow-x: auto;
+        overflow-y: hidden;
+        display: block;
+        -webkit-overflow-scrolling: touch;
+      }
+
       .viz-shell {
-        overflow: hidden;
+        width: 100%;
+        height: auto;
+        overflow: visible;
       }
 
       .viz-scale-box {
-        height: auto;
+        width: 920px;
+        height: 568px;
+        overflow: hidden;
+      }
+
+      .viz-inner {
+        position: relative;
+        width: 1520px;
+        height: 940px;
+        transform: scale(0.605) !important;
       }
     }
 
@@ -249,6 +262,11 @@
       .nav a,
       .reset-btn {
         flex: 1 1 100%;
+      }
+
+      .viz-scale-box {
+        width: 820px;
+        height: 506px;
       }
     }
   </style>
@@ -308,6 +326,7 @@
   <script>
     const BASE_WIDTH = 1520;
     const BASE_HEIGHT = 940;
+    const MOBILE_BREAKPOINT = 900;
 
     function resetViz() {
       const iframe = document.getElementById("tableau-frame");
@@ -321,6 +340,10 @@
 
       if (!shell || !scaleBox || !inner) return;
 
+      if (window.innerWidth <= MOBILE_BREAKPOINT) {
+        return;
+      }
+
       const availableWidth = shell.clientWidth;
       const availableHeight = shell.clientHeight;
 
@@ -329,12 +352,8 @@
       const scale = Math.min(scaleByWidth, scaleByHeight, 1);
 
       inner.style.transform = `scale(${scale})`;
-
-      if (window.innerWidth <= 900) {
-        scaleBox.style.height = `${BASE_HEIGHT * scale}px`;
-      } else {
-        scaleBox.style.height = `${availableHeight}px`;
-      }
+      scaleBox.style.height = `${availableHeight}px`;
+      scaleBox.style.width = "100%";
     }
 
     window.addEventListener("load", sizeViz);
