@@ -23,25 +23,28 @@
       font-family: Arial, sans-serif;
       background-color: var(--bg);
       color: var(--text);
+
+      /* ✅ allow ALL scrolling */
       overflow-x: auto;
       overflow-y: auto;
     }
 
     .page {
       display: grid;
-      grid-template-columns: 260px minmax(0, 1fr);
+      grid-template-columns: 260px auto;
       gap: 10px;
-      width: 100%;
-      min-height: 100vh;
-      padding: 6px 8px;
+      padding: 10px;
       align-items: start;
+
+      /* ❌ no height constraints */
+      width: max-content;
+      min-width: 100%;
     }
 
     .side-panel {
       display: flex;
       flex-direction: column;
       gap: 12px;
-      min-width: 0;
       padding-top: 6px;
     }
 
@@ -52,9 +55,9 @@
 
     .section p {
       font-size: 15px;
-      line-height: 1.42;
+      line-height: 1.45;
       color: var(--muted);
-      margin: 0 0 10px 0;
+      margin: 0 0 12px 0;
     }
 
     .nav {
@@ -74,19 +77,9 @@
       border-radius: 999px;
       font-weight: bold;
       text-align: center;
-      transition: all 0.2s ease;
       font-size: 16px;
-      font-family: Arial, sans-serif;
       cursor: pointer;
       width: 100%;
-      appearance: none;
-      -webkit-appearance: none;
-    }
-
-    .nav a:hover,
-    .reset-btn:hover {
-      background-color: #5a4d45;
-      border-color: #caa85a;
     }
 
     .nav a.active {
@@ -95,9 +88,8 @@
     }
 
     .viz-wrap {
-      min-width: 0;
+      /* ✅ allow scrolling inside viz too */
       overflow: auto;
-      -webkit-overflow-scrolling: touch;
     }
 
     .viz-inner {
@@ -110,79 +102,28 @@
       width: 1520px;
       height: 940px;
       display: block;
-      background: transparent;
     }
 
-    @media (max-width: 1100px) {
-      .page {
-        grid-template-columns: 220px minmax(0, 1fr);
-      }
-
-      .section h2 {
-        font-size: 20px;
-      }
-
-      .section p {
-        font-size: 14px;
-      }
-    }
-
+    /* MOBILE: stack layout but keep scrolling */
     @media (max-width: 900px) {
       .page {
-        grid-template-columns: 1fr;
-        min-height: auto;
-        padding: 10px;
-        gap: 14px;
-      }
-
-      .side-panel {
-        padding-top: 0;
-      }
-
-      .section h2 {
-        font-size: 20px;
-      }
-
-      .section p {
-        font-size: 15px;
-        line-height: 1.5;
+        display: block;
+        width: 100%;
       }
 
       .nav {
         flex-direction: row;
         flex-wrap: wrap;
         gap: 8px;
-        margin-top: 0;
       }
 
       .nav a,
       .reset-btn {
-        width: auto;
         flex: 1 1 calc(50% - 4px);
-        min-width: 140px;
-        font-size: 15px;
-        padding: 10px 12px;
-      }
-
-      .viz-wrap {
-        overflow: auto;
-      }
-
-      .viz-inner {
-        width: 1520px;
-        height: 940px;
       }
     }
 
     @media (max-width: 560px) {
-      .section h2 {
-        font-size: 18px;
-      }
-
-      .section p {
-        font-size: 14px;
-      }
-
       .nav a,
       .reset-btn {
         flex: 1 1 100%;
@@ -193,6 +134,7 @@
 
 <body>
   <div class="page">
+
     <aside class="side-panel">
       <div class="section">
         <h2>Overview</h2>
@@ -235,6 +177,7 @@
         </iframe>
       </div>
     </main>
+
   </div>
 
   <script>
@@ -243,5 +186,6 @@
       iframe.src = iframe.src;
     }
   </script>
+
 </body>
 </html>
