@@ -32,9 +32,12 @@
       grid-template-columns: 260px auto;
       gap: 10px;
       padding: 10px;
-      align-items: start;
+
+      /* ✅ KEY FIXES */
+      align-items: stretch;
       width: max-content;
       min-width: 100%;
+      min-height: 100vh;
     }
 
     .side-panel {
@@ -42,6 +45,15 @@
       flex-direction: column;
       gap: 12px;
       padding-top: 6px;
+
+      /* ✅ KEY FIXES */
+      height: 100%;
+      min-height: 0;
+    }
+
+    .section {
+      /* ✅ KEY FIX */
+      flex: 1 1 auto;
     }
 
     .section h2 {
@@ -60,6 +72,8 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
+
+      /* Already correct */
       margin-top: auto;
     }
 
@@ -115,16 +129,23 @@
         display: block;
         width: 100%;
         min-width: 0;
+        min-height: auto;
       }
 
       .side-panel {
         padding-top: 0;
+        height: auto;
+      }
+
+      .section {
+        flex: none;
       }
 
       .nav {
         flex-direction: row;
         flex-wrap: wrap;
         gap: 8px;
+        margin-top: 10px;
       }
 
       .nav a,
